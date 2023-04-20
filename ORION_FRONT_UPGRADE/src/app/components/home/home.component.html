@@ -1,0 +1,18 @@
+<app-navbar></app-navbar>
+<div id="ombraSfondo" class="d-flex flex-column align-items-center">
+    <h1 class="fs-2 text-center text-light my-4">Benvenuto, {{utenteCorrenteRegistrato.name}}.</h1>
+    <div class="d-flex flex-wrap w-75 justify-content-evenly">
+        <div class="card col-12 col-lg-5 p-3">
+            <h2 class="text-center mb-4">Panoramica Prodotti</h2>
+            <p class="text-center">Numero prodotti in catalogo: {{numeroProdotti}}</p>
+            <p class="text-center">Prezzo medio prodotti: {{prezzoMedioProdotto}} euro</p>
+            <button class="btn btn-success" type="button" [routerLink]="['/lista-prodotti']">Gestione Prodotti</button>
+        </div>
+        <div class="card col-12 col-lg-5 p-3 offset-lg-1 mt-sm-4 mt-lg-0">
+            <h2 class="text-center mb-4">Panoramica Ordini</h2>
+            <p class="text-center">Numero ordini effettuati: {{numeroOrdini}}</p>
+            <p class="text-center">Importo medio ordini: {{importoMedioOrdini}} euro</p>
+            <button class="btn btn-success" type="button" [routerLink]="['/lista-ordini']">Gestione Ordini</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+@media screen and (min-width: 320px) {
+    #ombraSfondo {
+        width: 100%;
+        min-height: 100vh;
+        background-color: rgba(0, 0, 0, 0.9);
+
+        #contenitoreFormLogin {
+            border-radius: 10px;
+            filter: drop-shadow(1px 1px 5px rgba(0, 0, 0, 0.75));
+            background-color: #2e2e2e;
+            position: absolute;
+            width: 70%;
+            top: 15%;
+            left: 15%;
+            right: 15%;
+
+            .campoVuoto {
+                font-size: 0.7rem !important;
+                margin-bottom: 20px !important;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 560px) {
+    #ombraSfondo {
+        #contenitoreFormLogin {
+            width: 50%;
+            left: 25%;
+            right: 25%;
+        }
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    #ombraSfondo {
+        #contenitoreFormLogin {
+            width: 30%;
+            left: 35%;
+            right: 35%;
+        }
+    }
+}

@@ -1,0 +1,467 @@
+<app-navbar></app-navbar>
+<div id="ombraSfondo" class="d-flex flex-column align-items-center">
+    <button class="mt-3 btn btn-success" type="button" [routerLink]="['/lista-prodotti']">Indietro</button>
+    <form id="formInserimentoCategoria" class="formInserimento card w-75 mt-3 d-flex flex-column justify-content-center flex-xl-row align-items-xl-center" #formCategoria="ngForm" (ngSubmit)="verificaCategoriaProdotto(formCategoria)">
+        <p class="ms-2 mt-1 mt-xl-0 mb-0">Che tipo di prodotto vuoi inserire?</p>
+        <select class="m-2 p-1 border border-secondary rounded-2" name="categoriaProdotto" id="inserisciCategoriaProdotto">
+            <option value="Racchette">Racchette</option>
+            <option value="Palline">Palline</option>
+            <option value="Corde">Corde</option>
+            <option value="Magliette">Magliette</option>
+            <option value="Pantaloncini">Pantaloncini</option>
+            <option value="Borsoni">Borsoni</option>
+            <option value="Scarpe">Scarpe</option>
+        </select>
+        <button class="btn btn-success" type="submit" id="buttonInserisciCategoria">Visualizza form completo</button>
+    </form>
+
+    <div class="card w-75 mt-3" *ngIf="risposta == 'Racchette'">
+        <div id="popupInserimentoCustomRacchette" class="popupInserimentoCustom inattivo">
+            <p>Racchetta inserita correttamente!</p>
+            <button class="btn btn-success d-block m-auto mt-2" type="button" [routerLink]="'/lista-prodotti'" (click)="rimettiInattivoPopupRacchette()">Vedi lista dei prodotti aggiornata</button>
+        </div>
+        <form id="formRacchette" #formRacchetta="ngForm" (ngSubmit)="creaRacchetta(formRacchetta)">
+            <p class="mt-2 ms-2">Nome racchetta
+                <input (keyup)="verificaCampiVuotiRacchetta()" (keyup)="verificaPresenzaNomeRacchetta()" (keyup)="verificaNumeriNegativiInputRacchetta()" class="p-1 ms-2 border border-secondary rounded-2" type="text" name="nomeRacchetta" id="nomeRacchetta" placeholder="Es. Head Prestige" maxlength="40">
+            </p>
+            <p id="erroreNomeRacchetta" class="ms-2 text-danger" *ngIf="campanello == true">Nome prodotto già presente in catalogo. Sceglierne un altro.</p>
+            <p class="ms-2">Prezzo racchetta
+                <input (keyup)="verificaCampiVuotiRacchetta()" (keyup)="verificaPresenzaNomeRacchetta()" (keyup)="verificaNumeriNegativiInputRacchetta()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="prezzoRacchetta" id="prezzoRacchetta" placeholder="Es. 179.9" min="0">
+            </p>
+            <p class="ms-2">Pezzi iniziali
+                <input (keyup)="verificaCampiVuotiRacchetta()" (keyup)="verificaPresenzaNomeRacchetta()" (keyup)="verificaNumeriNegativiInputRacchetta()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="pezziInizialiRacchetta" id="pezziInizialiRacchetta" placeholder="Es. 10" min="0">
+            </p>
+            <p class="ms-2">Marchio racchetta
+                <select class="m-2 p-1 border border-secondary rounded-2" name="marchioRacchetta" id="marchioRacchetta">
+                    <option value="Babolat">Babolat</option>
+                    <option value="Head">Head</option>
+                    <option value="Wilson">Wilson</option>
+                    <option value="Yonex">Yonex</option>
+                    <option value="Prince">Prince</option>
+                </select>
+            </p>
+            <p class="ms-2">Larghezza piatto corde
+                <select class="m-2 p-1 border border-secondary rounded-2" name="larghezzaPiattoCordeRacchetta" id="larghezzaPiattoCordeRacchetta">
+                    <option value="_90">90 in²</option>
+                    <option value="_95">95 in²</option>
+                    <option value="_98">98 in²</option>
+                    <option value="_100">100 in²</option>
+                    <option value="_105">105 in²</option>
+                </select>
+            </p>
+            <p class="ms-2">Peso in grammi
+                <input (keyup)="verificaCampiVuotiRacchetta()" (keyup)="verificaPresenzaNomeRacchetta()" (keyup)="verificaNumeriNegativiInputRacchetta()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="pesoRacchetta" id="pesoRacchetta" placeholder="Es. 300" min="0">
+            </p>
+            <p class="ms-2">Bilanciamento in mm
+                <input (keyup)="verificaCampiVuotiRacchetta()" (keyup)="verificaPresenzaNomeRacchetta()" (keyup)="verificaNumeriNegativiInputRacchetta()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="bilanciamentoRacchetta" id="bilanciamentoRacchetta" placeholder="Es. 320" min="0">
+            </p>
+            <p class="ms-2">Lunghezza in cm
+                <input (keyup)="verificaCampiVuotiRacchetta()" (keyup)="verificaPresenzaNomeRacchetta()" (keyup)="verificaNumeriNegativiInputRacchetta()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="lunghezzaRacchetta" id="lunghezzaRacchetta" placeholder="Es. 68.7" min="0">
+            </p>
+            <p class="ms-2">Schema corde
+                <select class="m-2 p-1 border border-secondary rounded-2" name="schemaCordeRacchetta" id="schemaCordeRacchetta">
+                    <option value="_16x19">16x19</option>
+                    <option value="_18x20">18x20</option>
+                </select>
+            </p>
+            <p class="ms-2">Grandezza manico
+                <select class="m-2 p-1 border border-secondary rounded-2" name="grandezzaManicoRacchetta" id="grandezzaManicoRacchetta">
+                    <option value="L2">L2</option>
+                    <option value="L3">L3</option>
+                    <option value="L4">L4</option>
+                </select>
+            </p>
+            <p class="ms-2">Fornita di fodero
+                <select class="m-2 p-1 border border-secondary rounded-2" name="fornitaFoderoRacchetta" id="fornitaFoderoRacchetta">
+                    <option value="false">No</option>
+                    <option value="true">Si</option>
+                </select>
+            </p>
+            <p class="ms-2">Fornita incordata
+                <select class="m-2 p-1 border border-secondary rounded-2" name="fornitaIncordataRacchetta" id="fornitaIncordataRacchetta">
+                    <option value="false">No</option>
+                    <option value="true">Si</option>
+                </select>
+            </p>
+            <p class="ms-2 text-center text-danger numeroNegativo" *ngIf="alertNumeroNegativo == true">Hai inserito un numero negativo in uno o più input. Correggi.</p>
+            <button disabled class="btn btn-success d-block m-auto mb-3" type="submit" id="inserisciRacchetta">Inserisci</button>
+            </form>
+    </div>
+    <div class="card w-75 mt-3" *ngIf="risposta == 'Palline'">
+        <div>
+            <div id="popupInserimentoCustomPalline" class="popupInserimentoCustom inattivo">
+                <p>Tubo palline inserito correttamente!</p>
+                <button class="btn btn-success d-block m-auto mt-2" type="button" [routerLink]="'/lista-prodotti'" (click)="rimettiInattivoPopupPalline()">Vedi lista dei prodotti aggiornata</button>
+            </div>
+            <form id="formPalline" #formPallina="ngForm" (ngSubmit)="creaTuboPalline(formPallina)">
+                <p class="mt-2 ms-2">Nome tubo palline
+                    <input (keyup)="verificaCampiVuotiPalline()" (keyup)="verificaPresenzaNomePalline()" (keyup)="verificaNumeriNegativiInputPalline()" class="p-1 ms-2 border border-secondary rounded-2" type="text" name="nomePalline" id="nomePalline" placeholder="Es. Wilson US Open" maxlength="40">
+                </p>
+                <p id="erroreNomePalline" class="ms-2 text-danger" *ngIf="campanello == true">Nome prodotto già presente in catalogo. Sceglierne un altro.</p>
+                <p class="ms-2">Prezzo tubo palline
+                    <input (keyup)="verificaCampiVuotiPalline()" (keyup)="verificaPresenzaNomePalline()" (keyup)="verificaNumeriNegativiInputPalline()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="prezzoPalline" id="prezzoPalline" placeholder="Es. 9.99" min="0">
+                </p>
+                <p class="ms-2">Pezzi iniziali
+                    <input (keyup)="verificaCampiVuotiPalline()" (keyup)="verificaPresenzaNomePalline()" (keyup)="verificaNumeriNegativiInputPalline()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="pezziInizialiPalline" id="pezziInizialiPalline" placeholder="Es. 10" min="0">
+                </p>
+                <p class="ms-2">Marchio Palline
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="marchioPalline" id="marchioPalline">
+                        <option value="Dunlop">Dunlop</option>
+                        <option value="Babolat">Babolat</option>
+                        <option value="Head">Head</option>
+                        <option value="Wilson">Wilson</option>
+                    </select>
+                </p>
+                <p class="ms-2">Quantità nel tubo
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="quantitaInTuboPalline" id="quantitaInTuboPalline">
+                        <option value="Tubo_da_3_palline">Tubo da 3 palline</option>
+                        <option value="Tubo_da_4_palline">Tubo da 4 palline</option>
+                    </select>
+                </p>
+                <p class="ms-2">Superficie di gioco
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="tipoSuperficieDiGioco" id="tipoSuperficieDiGioco">
+                        <option value="All_court">All-Court</option>
+                        <option value="Terra_battuta">Terra battuta</option>
+                        <option value="Superficie_veloce">Superficie veloce</option>
+                    </select>
+                </p>
+                <p class="ms-2 text-center text-danger numeroNegativo" *ngIf="alertNumeroNegativo == true">Hai inserito un numero negativo in uno o più input. Correggi.</p>
+                <button disabled class="btn btn-success d-block m-auto mb-3" type="submit" id="inserisciTuboPalline">Inserisci</button>
+            </form>
+        </div>
+    </div>
+    <div class="card w-75 mt-3" *ngIf="risposta == 'Corde'">
+        <div>
+            <div id="popupInserimentoCustomCorde" class="popupInserimentoCustom inattivo">
+                <p>Corda inserita correttamente!</p>
+                <button class="btn btn-success d-block m-auto mt-2" type="button" [routerLink]="'/lista-prodotti'" (click)="rimettiInattivoPopupCorde()">Vedi lista dei prodotti aggiornata</button>
+            </div>
+            <form id="formCorde" #formCorda="ngForm" (ngSubmit)="creaCorda(formCorda)">
+                <p class="mt-2 ms-2">Nome corda
+                    <input (keyup)="verificaCampiVuotiCorde()" (keyup)="verificaPresenzaNomeCorda()" (keyup)="verificaNumeriNegativiInputCorde()" class="p-1 ms-2 border border-secondary rounded-2" type="text" name="nomeCorde" id="nomeCorde" placeholder="Es. Luxilon Black" maxlength="40">
+                </p>
+                <p id="erroreNomeCorda" class="ms-2 text-danger" *ngIf="campanello == true">Nome prodotto già presente in catalogo. Sceglierne un altro.</p>
+                <p class="ms-2">Prezzo corda
+                    <input (keyup)="verificaCampiVuotiCorde()" (keyup)="verificaPresenzaNomeCorda()" (keyup)="verificaNumeriNegativiInputCorde()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="prezzoCorde" id="prezzoCorde" placeholder="Es. 15.9" min="0">
+                </p>
+                <p class="ms-2">Pezzi iniziali
+                    <input (keyup)="verificaCampiVuotiCorde()" (keyup)="verificaPresenzaNomeCorda()" (keyup)="verificaNumeriNegativiInputCorde()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="pezziInizialiCorde" id="pezziInizialiCorde" placeholder="Es. 10" min="0">
+                </p>
+                <p class="ms-2">Marchio corda
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="marchioCordaTennis" id="marchioCordaTennis">
+                        <option value="Babolat">Babolat</option>
+                        <option value="Head">Head</option>
+                        <option value="Yonex">Yonex</option>
+                        <option value="Solinco">Solinco</option>
+                        <option value="Luxilon">Luxilon</option>
+                        <option value="Tecnifibre">Tecnifibre</option>
+                    </select>
+                </p>
+                <p class="ms-2">Calibro corda
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="calibroCorda" id="calibroCorda">
+                        <option value="_1_20">1.20</option>
+                        <option value="_1_25">1.25</option>
+                        <option value="_1_30">1.30</option>
+                    </select>
+                </p>
+                <p class="ms-2">Colore corda
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="coloreCorda" id="coloreCorda">
+                        <option value="Bianco">Bianco</option>
+                        <option value="Grigio">Grigio</option>
+                        <option value="Nero">Nero</option>
+                        <option value="Giallo">Giallo</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Rosso">Rosso</option>
+                    </select>
+                </p>
+                <p class="ms-2">Tipo set vendita
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="tipoSetVenditaCordaTennis" id="tipoSetVenditaCordaTennis">
+                        <option value="Set_12metri">Set da 12 metri</option>
+                        <option value="Matassa_200metri">Matassa da 200 metri</option>
+                    </select>
+                </p>
+                <p class="ms-2">Materiale corda
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="materialeCordaTennis" id="materialeCordaTennis">
+                        <option value="Monofilamento">Monofilamento</option>
+                        <option value="Multifilamento">Multifilamento</option>
+                        <option value="Ibrido">Ibrido</option>
+                        <option value="Budello_naturale">Budello naturale</option>
+                    </select>
+                </p>
+                <p class="ms-2 text-center text-danger numeroNegativo" *ngIf="alertNumeroNegativo == true">Hai inserito un numero negativo in uno o più input. Correggi.</p>
+                <button disabled class="btn btn-success d-block m-auto mb-3" type="submit" id="inserisciCorda">Inserisci</button>
+            </form>
+        </div>
+    </div>
+    <div class="card w-75 mt-3" *ngIf="risposta == 'Magliette'">
+        <div>
+            <div id="popupInserimentoCustomMagliette" class="popupInserimentoCustom inattivo">
+                <p>Maglietta inserita correttamente!</p>
+                <button class="btn btn-success d-block m-auto mt-2" type="button" [routerLink]="'/lista-prodotti'" (click)="rimettiInattivoPopupMagliette()">Vedi lista dei prodotti aggiornata</button>
+            </div>
+            <form id="formMagliette" #formMaglietta="ngForm" (ngSubmit)="creaMaglietta(formMaglietta)">
+                <p class="mt-2 ms-2">Nome maglietta
+                    <input (keyup)="verificaCampiVuotiMaglietta()" (keyup)="verificaPresenzaNomeMaglietta()" (keyup)="verificaNumeriNegativiInputMagliette()" class="p-1 ms-2 border border-secondary rounded-2" type="text" name="nomeMagliette" id="nomeMagliette" placeholder="Es. T-shirt Babolat" maxlength="40">
+                </p>
+                <p id="erroreNomeMaglietta" class="ms-2 text-danger" *ngIf="campanello == true">Nome prodotto già presente in catalogo. Sceglierne un altro.</p>
+                <p class="ms-2">Prezzo maglietta
+                    <input (keyup)="verificaCampiVuotiMaglietta()" (keyup)="verificaPresenzaNomeMaglietta()" (keyup)="verificaNumeriNegativiInputMagliette()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="prezzoMagliette" id="prezzoMagliette" placeholder="Es. 25.4" min="0">
+                </p>
+                <p class="ms-2">Pezzi iniziali
+                    <input (keyup)="verificaCampiVuotiMaglietta()" (keyup)="verificaPresenzaNomeMaglietta()" (keyup)="verificaNumeriNegativiInputMagliette()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="pezziInizialiMagliette" id="pezziInizialiMagliette" placeholder="Es. 10" min="0">
+                </p>
+                <p class="ms-2">Destinatario abbigliamento
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="destinatarioAbbigliamentoMagl" id="destinatarioAbbigliamentoMagl">
+                        <option value="Uomo">Uomo</option>
+                        <option value="Donna">Donna</option>
+                        <option value="Bambino">Bambino</option>
+                    </select>
+                </p>
+                <p class="ms-2">Marchio abbigliamento
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="marchioAbbigliamentoMagl" id="marchioAbbigliamentoMagl">
+                        <option value="Nike">Nike</option>
+                        <option value="Adidas">Adidas</option>
+                        <option value="Lotto">Lotto</option>
+                        <option value="Babolat">Babolat</option>
+                        <option value="Wilson">Wilson</option>
+                        <option value="Head">Head</option>
+                        <option value="Joma">Joma</option>
+                    </select>
+                </p>
+                <p class="ms-2">Taglia abbigliamento
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="tagliaAbbigliamentoMagl" id="tagliaAbbigliamentoMagl">
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                </p>
+                <p class="ms-2">Colore abbigliamento
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="coloreAbbigliamentoMagl" id="coloreAbbigliamentoMagl">
+                        <option value="Bianco">Bianco</option>
+                        <option value="Grigio">Grigio</option>
+                        <option value="Nero">Nero</option>
+                        <option value="Giallo">Giallo</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Rosso">Rosso</option>
+                        <option value="Blu">Blu</option>
+                        <option value="Arancione">Arancione</option>
+                        <option value="Rosa">Rosa</option>
+                        <option value="Fucsia">Fucsia</option>
+                        <option value="Azzurro">Azzurro</option>
+                    </select>
+                </p>
+                <p class="ms-2">Tipo collo maglietta
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="tipoColloMaglietta" id="tipoColloMaglietta">
+                        <option value="Collo_V">Collo a V</option>
+                        <option value="Girocollo">Girocollo</option>
+                    </select>
+                </p>
+                <p class="ms-2 text-center text-danger numeroNegativo" *ngIf="alertNumeroNegativo == true">Hai inserito un numero negativo in uno o più input. Correggi.</p>
+                <button disabled class="btn btn-success d-block m-auto mb-3" type="submit" id="inserisciMaglietta">Inserisci</button>
+            </form>
+        </div>
+    </div>
+    <div class="card w-75 mt-3" *ngIf="risposta == 'Pantaloncini'">
+        <div>
+            <div id="popupInserimentoCustomPantaloncini" class="popupInserimentoCustom inattivo">
+                <p>Pantaloncino inserito correttamente!</p>
+                <button class="btn btn-success d-block m-auto mt-2" type="button" [routerLink]="'/lista-prodotti'" (click)="rimettiInattivoPopupPantaloncini()">Vedi lista dei prodotti aggiornata</button>
+            </div>
+            <form id="formPantaloncini" #formPantaloncino="ngForm" (ngSubmit)="creaPantaloncino(formPantaloncino)">
+                <p class="mt-2 ms-2">Nome Pantaloncino
+                    <input (keyup)="verificaCampiVuotiPantaloncino()" (keyup)="verificaPresenzaNomePantaloncino()" (keyup)="verificaNumeriNegativiInputPantaloncini()" class="p-1 ms-2 border border-secondary rounded-2" type="text" name="nomePantaloncino" id="nomePantaloncino" placeholder="Es. Shorts Babolat" maxlength="40">
+                </p>
+                <p id="erroreNomePantaloncino" class="ms-2 text-danger" *ngIf="campanello == true">Nome prodotto già presente in catalogo. Sceglierne un altro.</p>
+                <p class="ms-2">Prezzo Pantaloncino
+                    <input (keyup)="verificaCampiVuotiPantaloncino()" (keyup)="verificaPresenzaNomePantaloncino()" (keyup)="verificaNumeriNegativiInputPantaloncini()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="prezzoPantaloncino" id="prezzoPantaloncino" placeholder="Es. 19.5" min="0">
+                </p>
+                <p class="ms-2">Pezzi iniziali
+                    <input (keyup)="verificaCampiVuotiPantaloncino()" (keyup)="verificaPresenzaNomePantaloncino()" (keyup)="verificaNumeriNegativiInputPantaloncini()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="pezziInizialiPantaloncino" id="pezziInizialiPantaloncino" placeholder="Es. 10" min="0">
+                </p>
+                <p class="ms-2">Destinatario abbigliamento
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="destinatarioAbbigliamentoPantal" id="destinatarioAbbigliamentoPantal">
+                        <option value="Uomo">Uomo</option>
+                        <option value="Donna">Donna</option>
+                        <option value="Bambino">Bambino</option>
+                    </select>
+                </p>
+                <p class="ms-2">Marchio abbigliamento
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="marchioAbbigliamentoPantal" id="marchioAbbigliamentoPantal">
+                        <option value="Nike">Nike</option>
+                        <option value="Adidas">Adidas</option>
+                        <option value="Lotto">Lotto</option>
+                        <option value="Babolat">Babolat</option>
+                        <option value="Wilson">Wilson</option>
+                        <option value="Head">Head</option>
+                        <option value="Joma">Joma</option>
+                    </select>
+                </p>
+                <p class="ms-2">Taglia abbigliamento
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="tagliaAbbigliamentoPantal" id="tagliaAbbigliamentoPantal">
+                        <option value="XS">XS</option>
+                        <option value="S">S</option>
+                        <option value="M">M</option>
+                        <option value="L">L</option>
+                        <option value="XL">XL</option>
+                        <option value="XXL">XXL</option>
+                    </select>
+                </p>
+                <p class="ms-2">Colore abbigliamento
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="coloreAbbigliamentoPantal" id="coloreAbbigliamentoPantal">
+                        <option value="Bianco">Bianco</option>
+                        <option value="Grigio">Grigio</option>
+                        <option value="Nero">Nero</option>
+                        <option value="Giallo">Giallo</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Rosso">Rosso</option>
+                        <option value="Blu">Blu</option>
+                        <option value="Arancione">Arancione</option>
+                        <option value="Rosa">Rosa</option>
+                        <option value="Fucsia">Fucsia</option>
+                        <option value="Azzurro">Azzurro</option>
+                    </select>
+                </p>
+                <p class="ms-2">Lunghezza Pantaloncino
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="lunghezzaPantal" id="lunghezzaPantal">
+                        <option value="Normale">Normale</option>
+                        <option value="Corto">Corto</option>
+                        <option value="Pinocchietto">Pinocchietto</option>
+                    </select>
+                </p>
+                <p class="ms-2">Tasche Pantaloncino
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="taschePantal" id="taschePantal">
+                        <option value="Tasche_normali">Tasche normali</option>
+                        <option value="Tasche_americane">Tasche americane</option>
+                        <option value="Senza_tasche">Senza tasche</option>
+                    </select>
+                </p>
+                <p class="ms-2 text-center text-danger numeroNegativo" *ngIf="alertNumeroNegativo == true">Hai inserito un numero negativo in uno o più input. Correggi.</p>
+                <button disabled class="btn btn-success d-block m-auto mb-3" type="submit" id="inserisciPantaloncino">Inserisci</button>
+            </form>
+        </div>
+    </div>
+    <div class="card w-75 mt-3" *ngIf="risposta == 'Borsoni'">
+        <div>
+            <div id="popupInserimentoCustomBorsoni" class="popupInserimentoCustom inattivo">
+                <p>Borsone inserito correttamente!</p>
+                <button class="btn btn-success d-block m-auto mt-2" type="button" [routerLink]="'/lista-prodotti'" (click)="rimettiInattivoPopupBorsoni()">Vedi lista dei prodotti aggiornata</button>
+            </div>
+            <form id="formBorsoni" #formBorsone="ngForm" (ngSubmit)="creaBorsone(formBorsone)">
+                <p class="mt-2 ms-2">Nome borsa
+                    <input (keyup)="verificaCampiVuotiBorsone()" (keyup)="verificaPresenzaNomeBorsone()" (keyup)="verificaNumeriNegativiInputBorsoni()" class="p-1 ms-2 border border-secondary rounded-2" type="text" name="nomeBorsa" id="nomeBorsa" placeholder="Es. Babolat Bag" maxlength="40">
+                </p>
+                <p id="erroreNomeBorsa" class="ms-2 text-danger" *ngIf="campanello == true">Nome prodotto già presente in catalogo. Sceglierne un altro.</p>
+                <p class="ms-2">Prezzo borsa
+                    <input (keyup)="verificaCampiVuotiBorsone()" (keyup)="verificaPresenzaNomeBorsone()" (keyup)="verificaNumeriNegativiInputBorsoni()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="prezzoBorsa" id="prezzoBorsa" placeholder="Es. 129.9" min="0">
+                </p>
+                <p class="ms-2">Pezzi iniziali
+                    <input (keyup)="verificaCampiVuotiBorsone()" (keyup)="verificaPresenzaNomeBorsone()" (keyup)="verificaNumeriNegativiInputBorsoni()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="pezziInizialiBorsa" id="pezziInizialiBorsa" placeholder="Es. 10" min="0">
+                </p>
+                <p class="ms-2">Marchio borsa
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="marchioBorsa" id="marchioBorsa">
+                        <option value="Nike">Nike</option>
+                        <option value="Adidas">Adidas</option>
+                        <option value="Lotto">Lotto</option>
+                        <option value="Babolat">Babolat</option>
+                        <option value="Wilson">Wilson</option>
+                        <option value="Head">Head</option>
+                        <option value="Joma">Joma</option>
+                    </select>
+                </p>
+                <p class="ms-2">Capacità borsa
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="capacitaBorsa" id="capacitaBorsa">
+                        <option value="_2_5_Racchette">Da 2 a 5 racchette</option>
+                        <option value="_6_8_Racchette">Da 6 a 8 racchette</option>
+                        <option value="Piu_di_9">Più di 9 racchette</option>
+                    </select>
+                </p>
+                <p class="ms-2">Isolamento termico
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="isolamentoTermicoBorsa" id="isolamentoTermicoBorsa">
+                        <option value="false">No</option>
+                        <option value="true">Si</option>
+                    </select>
+                </p>
+                <p class="ms-2 text-center text-danger numeroNegativo" *ngIf="alertNumeroNegativo == true">Hai inserito un numero negativo in uno o più input. Correggi.</p>
+                <button disabled class="btn btn-success d-block m-auto mb-3" type="submit" id="inserisciBorsa">Inserisci</button>
+            </form>
+        </div>
+    </div>
+    <div class="card w-75 mt-3" *ngIf="risposta == 'Scarpe'">
+        <div>
+            <div id="popupInserimentoCustomScarpe" class="popupInserimentoCustom inattivo">
+                <p>Scarpe inserite correttamente!</p>
+                <button class="btn btn-success d-block m-auto mt-2" type="button" [routerLink]="'/lista-prodotti'" (click)="rimettiInattivoPopupScarpe()">Vedi lista dei prodotti aggiornata</button>
+            </div>
+            <form id="formScarpee" #formScarpe="ngForm" (ngSubmit)="creaScarpe(formScarpe)">
+                <p class="mt-2 ms-2">Nome scarpe
+                    <input (keyup)="verificaCampiVuotiScarpe()" (keyup)="verificaPresenzaNomeScarpe()" (keyup)="verificaNumeriNegativiInputScarpe()" class="p-1 ms-2 border border-secondary rounded-2" type="text" name="nomeScarpe" id="nomeScarpe" placeholder="Es. Nike Zoom Vapor 3.0" maxlength="40">
+                </p>
+                <p id="erroreNomeScarpe" class="ms-2 text-danger" *ngIf="campanello == true">Nome prodotto già presente in catalogo. Sceglierne un altro.</p>
+                <p class="ms-2">Prezzo scarpe
+                    <input (keyup)="verificaCampiVuotiScarpe()" (keyup)="verificaPresenzaNomeScarpe()" (keyup)="verificaNumeriNegativiInputScarpe()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="prezzoScarpe" id="prezzoScarpe" placeholder="Es. 169.9" min="0">
+                </p>
+                <p class="ms-2">Pezzi iniziali
+                    <input (keyup)="verificaCampiVuotiScarpe()" (keyup)="verificaPresenzaNomeScarpe()" (keyup)="verificaNumeriNegativiInputScarpe()" class="p-1 ms-2 border border-secondary rounded-2" type="number" name="pezziInizialiScarpe" id="pezziInizialiScarpe" placeholder="Es. 10" min="0">
+                </p>
+                <p class="ms-2">Marchio Scarpe
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="marchioScarpe" id="marchioScarpe">
+                        <option value="Nike">Nike</option>
+                        <option value="Adidas">Adidas</option>
+                        <option value="Lotto">Lotto</option>
+                        <option value="Babolat">Babolat</option>
+                        <option value="Wilson">Wilson</option>
+                        <option value="Head">Head</option>
+                        <option value="Joma">Joma</option>
+                    </select>
+                </p>
+                <p class="ms-2">Destinatario Scarpe
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="destinatarioScarpe" id="destinatarioScarpe">
+                        <option value="Uomo">Uomo</option>
+                        <option value="Donna">Donna</option>
+                        <option value="Bambino">Bambino</option>
+                    </select>
+                </p>
+                <p class="ms-2">Superficie di gioco
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="tipoSuperficieDiGiocoScarpe" id="tipoSuperficieDiGiocoScarpe">
+                        <option value="All_court">All-Court</option>
+                        <option value="Terra_battuta">Terra battuta</option>
+                        <option value="Superficie_veloce">Superficie veloce</option>
+                    </select>
+                </p>
+                <p class="ms-2">Taglia Scarpe
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="tagliaScarpe" id="tagliaScarpe">
+                        <option value="_38">38</option>
+                        <option value="_39">39</option>
+                        <option value="_40">40</option>
+                        <option value="_41">41</option>
+                        <option value="_42">42</option>
+                        <option value="_43">43</option>
+                        <option value="_44">44</option>
+                        <option value="_45">45</option>
+                        <option value="_46">46</option>
+                    </select>
+                </p>
+                <p class="ms-2">Colore Scarpe
+                    <select class="m-2 p-1 border border-secondary rounded-2" name="coloreScarpe" id="coloreScarpe">
+                        <option value="Bianco">Bianco</option>
+                        <option value="Grigio">Grigio</option>
+                        <option value="Nero">Nero</option>
+                        <option value="Giallo">Giallo</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Rosso">Rosso</option>
+                        <option value="Blu">Blu</option>
+                        <option value="Arancione">Arancione</option>
+                        <option value="Rosa">Rosa</option>
+                        <option value="Fucsia">Fucsia</option>
+                        <option value="Azzurro">Azzurro</option>
+                    </select>
+                </p>
+                <p class="ms-2 text-center text-danger numeroNegativo" *ngIf="alertNumeroNegativo == true">Hai inserito un numero negativo in uno o più input. Correggi.</p>
+                <button disabled class="btn btn-success d-block m-auto mb-3" type="submit" id="inserisciScarpe">Inserisci</button>
+            </form>
+        </div>
+    </div>
+</div>

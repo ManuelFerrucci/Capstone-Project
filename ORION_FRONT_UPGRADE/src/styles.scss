@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    border: 0;
+    padding: 0;
+    outline: 0;
+    text-decoration: none;
+    color: inherit;
+    list-style: none;
+    font-size: 24px !important;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url(assets/IMGS/sfondo_tennis.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}

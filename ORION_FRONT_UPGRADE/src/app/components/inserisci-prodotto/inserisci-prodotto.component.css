@@ -1,0 +1,38 @@
+body {
+  position: relative;
+}
+
+.popupInserimentoCustom {
+  width: 60%;
+  padding: 20px;
+  border: 1px solid green;
+  background-color: #fff;
+  border-radius: 10px;
+  filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.6));
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: 40%;
+  z-index: 10;
+}
+.popupInserimentoCustom p {
+  margin: unset;
+  color: green;
+  font-size: 1.5rem !important;
+  text-align: center;
+}
+
+#erroreNomeRacchetta,
+#erroreNomePalline,
+#erroreNomeCorda,
+#erroreNomeMaglietta,
+#erroreNomePantaloncino,
+#erroreNomeBorsa,
+#erroreNomeScarpe {
+  font-size: 0.7rem !important;
+  margin-bottom: 50px !important;
+}
+
+.inattivo {
+  display: none;
+}/*# sourceMappingURL=inserisci-prodotto.component.css.map */

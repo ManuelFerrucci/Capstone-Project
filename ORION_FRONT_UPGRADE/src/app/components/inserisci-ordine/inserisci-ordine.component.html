@@ -1,0 +1,31 @@
+<app-navbar></app-navbar>
+<div id="ombraSfondo" class="d-flex flex-column align-items-center">
+    <button id="buttonIndietro" class="mt-3 btn btn-success" type="button" [routerLink]="['/lista-ordini']">Indietro</button>
+    <div id="popupInserimentoCustomOrdini" class="popupInserimentoCustom inattivo">
+        <p>Ordine inserito correttamente!</p>
+        <button class="btn btn-success d-block m-auto mt-2" type="button" [routerLink]="['/lista-ordini']" (click)="rimettiInattivoPopupInserisciOrdine()">Vedi lista dei ordini aggiornata</button>
+    </div>
+    <div id="popupInserimentoCustomOrdiniERR" class="popupInserimentoCustomERR inattivo">
+        <p>ERRORE!</p>
+        <p>Non è stato inserito alcun prodotto alla lista, ordine NON inserito!</p>
+        <button class="btn btn-secondary d-block m-auto mt-2" type="button" [routerLink]="['/lista-ordini']" (click)="rimettiInattivoPopupInserisciOrdineERR()">Torna alla lista degli ordini</button>
+    </div>
+    <form id="formInserimentoOrdine" class="card w-75 mt-3" #formOrdine="ngForm" (ngSubmit)="creaOrdine(formOrdine)">
+        <p class="ms-2 mb-1 mt-3">Inserisci il cliente</p>
+        <input (keyup)="verificaValiditaInput()" (keyup)="verificaInserisciInLista()" (keyup)="verificaNumeriNegativi()" class="p-1 mx-2 mb-4 border border-secondary rounded-2" type="text" name="clienteOrdine" id="clienteOrdine" placeholder="Es. Mario Rossi" maxlength="40">
+        <p class="ms-2 mb-0">Seleziona il prodotto da acquistare:</p>
+        <select class="m-2 mb-4 p-1 border border-secondary rounded-2" name="selectProdottoDaAcquistare" id="selectProdottoDaAcquistare">
+            <option *ngFor="let prodotto of listaProdotti" value="{{prodotto.nome}}">{{prodotto.nome}} / {{prodotto.prezzo}} euro / {{prodotto.pezziDisponibili}} pezzi disponibili / {{prodotto.categoriaProdotto}} {{prodotto.destinatarioAbbigliamento}}</option>
+        </select>
+        <p class="ms-2 mb-1">Seleziona il numero di pezzi da acquistare</p>
+        <input (keyup)="verificaValiditaInput()" (keyup)="verificaInserisciInLista()" (keyup)="verificaNumeriNegativi()" class="p-1 mx-2 mb-2 border border-secondary rounded-2" type="number" name="pezziDaAcquistare" id="pezziDaAcquistare" placeholder="Es. 1" min="1">
+        <button disabled class="mx-2 mb-3 btn btn-success" type="button" id="buttonInserisciInLista" (click)="inserisciInLista()" (click)="verificaValiditaInput()" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Inserisci in lista acquisti</button>
+        <div *ngIf="listaProdottiAcq.length > 0">
+            <h2 class="ms-2 mt-2">Prodotti inseriti nella lista:</h2>
+            <p class="ms-2" *ngFor="let prodottoAcq of listaProdottiAcq">{{prodottoAcq.nome}} / {{prodottoAcq.numeroPezziAcquistati}} pezzi<button class="btn btn-danger ms-2" type="button" id="buttonRimuoviDaLista" (click)="rimuoviDallaLista(prodottoAcq.nome)" (click)="verificaValiditaInput()">Rimuovi</button></p>
+        </div>
+        <p class="ms-2 text-center text-danger numeroNegativo" *ngIf="alertErroreNumeroNegativo == true">Hai inserito un numero negativo. Correggi.</p>
+        <p class="ms-2 text-danger" *ngIf="utenteCorrenteRegistrato.roles.length < 2">NON SEI AUTORIZZATO AD INTERAGIRE CON QUESTA FUNZIONE</p>
+        <button disabled class="btn btn-success d-block m-auto mb-3" type="submit" id="buttonInserisciOrdine" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Inserisci ordine</button>
+    </form>
+</div>

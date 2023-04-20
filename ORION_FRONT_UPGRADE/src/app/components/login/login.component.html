@@ -1,0 +1,14 @@
+<div id="ombraSfondo">
+    <div id="contenitoreFormLogin" class="py-3 d-flex justify-content-center">
+        <form id="formLogin" #formLogin="ngForm" (ngSubmit)="accedi(formLogin)" class="d-flex flex-column align-items-center">
+            <h2 class="text-light">Inserisci credenziali</h2>
+            <p class="m-0 text-light">Username</p>
+            <input (keyup)="verificaValiditaInput()" class="p-1 my-2 border border-secondary rounded-2 w-75" type="text" ngModel #username="ngModel" name="username" id="username" placeholder="Es. Marco81" maxlength="40">
+            <p class="m-0 text-danger campoVuoto" *ngIf="alertErroreUsername == true">Campo obbligatorio</p>
+            <p class="m-0 text-light mt-2">Password</p>
+            <input (keyup)="verificaValiditaInput()" class="p-1 my-2 border border-secondary rounded-2 w-75" type="password" ngModel #password="ngModel" name="password" id="password" placeholder="Es. AB123" maxlength="15">
+            <p class="m-0 text-danger campoVuoto" *ngIf="alertErrorePassword == true">Campo obbligatorio</p>
+            <button disabled class="btn btn-success d-block m-auto mt-2" type="submit" id="buttonLogin">Accedi</button>
+        </form>
+    </div>
+</div>

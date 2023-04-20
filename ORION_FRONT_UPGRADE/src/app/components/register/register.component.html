@@ -1,0 +1,29 @@
+<app-navbar></app-navbar>
+<div id="ombraSfondo" class="py-3 d-flex flex-column align-items-center">
+    <button id="buttonIndietro" class="btn btn-success mb-3" type="button" [routerLink]="['/home']">Indietro</button>
+    <div id="popupInserimentoCustomUtente" class="popupInserimentoCustom inattivo">
+        <p>Utente inserito correttamente!</p>
+        <button class="btn btn-success d-block m-auto mt-2" type="button" [routerLink]="['/home']">Home</button>
+    </div>
+    <div id="contenitoreFormRegister" class="py-3 d-flex justify-content-center card">
+        <form class="d-flex flex-column align-items-center" #formCrea="ngForm" (ngSubmit)="creaNuovoUtente(formCrea)">
+            <h2 class="fs-5 text-light">Crea nuovo Utente</h2>
+            <p class="m-0 mt-2 text-light">Nome completo</p>
+            <input (keyup)="verificaValiditaInput()" class="p-1 my-2 border border-secondary rounded-2 w-75" type="text" name="name" id="name" placeholder="Es. Giovanni" maxlength="30">
+            <p class="m-0 mt-2 text-light">Username</p>
+            <input (keyup)="verificaValiditaInput()" class="p-1 my-2 border border-secondary rounded-2 w-75" type="text" name="username" id="username" placeholder="Es. Marco81" maxlength="40">
+            <p class="m-0 mt-2 text-light">Email</p>
+            <input (keyup)="verificaValiditaInput()" class="p-1 my-2 border border-secondary rounded-2 w-75" type="email" name="email" id="email" placeholder="Es. example@a.it" maxlength="35">
+            <p class="m-0 mt-2 text-light">Password</p>
+            <input (keyup)="verificaValiditaInput()" class="p-1 my-2 border border-secondary rounded-2 w-75" type="password" name="password" id="password" placeholder="Es. AB123" maxlength="15">
+            <p class="m-0 mt-2 text-light">Ruolo</p>
+            <select class="m-2 mb-4 p-1 border border-secondary rounded-2" name="roles" id="roles">
+                <option value="ROLE_USER">User</option>
+                <option value="ROLE_ADMIN">Amministratore</option>
+            </select>
+            <p class="m-0 mt-2 text-danger campoVuoto" *ngIf="alertErroreVuoto == true">Uno o più campi sono vuoti</p>
+            <button disabled class="btn btn-success" type="submit" id="buttonLogin" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Registra</button>
+        </form>
+        <p class="text-danger text-center" *ngIf="utenteCorrenteRegistrato.roles.length < 2">NON SEI AUTORIZZATO AD INTERAGIRE CON QUESTA FUNZIONE</p>
+    </div>
+</div>

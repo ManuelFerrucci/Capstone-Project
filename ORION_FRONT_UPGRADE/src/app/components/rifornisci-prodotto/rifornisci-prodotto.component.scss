@@ -1,0 +1,65 @@
+body {
+    position: relative;
+}
+
+@media screen and (min-width: 320px) {
+    #ombraSfondo {
+        width: 100%;
+        min-height: 100vh;
+        background-color: rgba(0, 0, 0, 0.9);
+
+        .card {
+            margin: 20px 0;
+
+            p {
+                font-size: 0.8rem !important;
+            }
+        }
+
+        .popupRifornimentoProdotto {
+            width: 60%;
+            padding: 20px;
+            border: 1px solid green;
+            background-color: #fff;
+            border-radius: 10px;
+            filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.6));
+            position: absolute;
+            left: 20%;
+            right: 20%;
+            top: 40%;
+            z-index: 10;
+
+            p {
+                margin: unset;
+                color: green;
+                font-size: 1.5rem !important;
+                text-align: center;
+            }
+        }
+
+        .numeroNegativo {
+            font-size: 0.8rem !important;
+            margin-bottom: 50px !important;
+        }
+
+        .inattivo {
+            display: none !important;
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #ombraSfondo {
+        .card {
+
+            p {
+                font-size: 1rem !important;
+            }
+        }
+
+        .numeroNegativo {
+            font-size: 0.8rem !important;
+            margin-bottom: unset !important;
+        }
+    }
+}
