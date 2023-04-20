@@ -1,0 +1,46 @@
+.btn {
+    width: unset;
+}
+
+@media screen and (min-width: 320px) {
+    #ombraSfondo {
+        width: 100%;
+        min-height: 100vh;
+        background-color: rgba(0, 0, 0, 0.9);
+
+        #contenitorePulsantiInAlto {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card {
+            margin: 20px 0;
+
+            p {
+                font-size: 0.8rem !important;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 992px) {
+    #ombraSfondo {
+
+        #contenitorePulsantiInAlto {
+            display: unset;
+            flex-direction: unset;
+        }
+
+        .card {
+
+            p {
+                font-size: 1rem !important;
+            }
+
+            .contenitorePulsanti {
+                flex-direction: row !important;
+                justify-content: center;
+            }
+        }
+    }
+}

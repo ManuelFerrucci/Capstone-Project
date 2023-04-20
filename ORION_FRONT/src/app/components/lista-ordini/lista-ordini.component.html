@@ -1,0 +1,17 @@
+<app-navbar></app-navbar>
+<div id="ombraSfondo" class="d-flex flex-column align-items-center">
+    <button class="mt-3 btn btn-success" type="button" [routerLink]="['/home']" *ngIf="utenteCorrenteRegistrato.roles.length == 1">Indietro</button>
+    <button class="mt-3 btn btn-success" type="button" [routerLink]="['/lista-ordini/inserisci-ordine']" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Inserisci
+        nuovo ordine</button>
+    <div *ngFor="let ordine of listaOrdini" id="riga" class="card w-75">
+        <p class="ms-2 mt-3">Id: {{ ordine.id }}</p>
+        <p class="ms-2">Data Ordine: {{ ordine.dataOrdine }}</p>
+        <p class="ms-2">Cliente: {{ ordine.cliente }}</p>
+        <div class="d-flex flex-column align-items-center contenitorePulsanti">
+            <button class="mb-2 btn btn-success" type="button"
+                [routerLink]="['/lista-ordini/dettaglio-ordine/' + ordine.id]">Dettaglio</button>
+            <button class="mb-2 ms-md-2 btn btn-danger" type="button"
+                [routerLink]="['/lista-ordini/elimina-ordine/' + ordine.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Elimina</button>
+        </div>
+    </div>
+</div>

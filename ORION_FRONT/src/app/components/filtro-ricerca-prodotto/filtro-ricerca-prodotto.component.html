@@ -1,0 +1,173 @@
+<app-navbar></app-navbar>
+<div id="ombraSfondo" class="d-flex flex-column align-items-center">
+    <button class="mt-3 btn btn-success" type="button" [routerLink]="['/lista-prodotti']">Indietro</button>
+    <div id="contenitoreFormFiltroProdotti" class="card w-75 mt-3">
+        <form class="formFiltri d-flex flex-column justify-content-center flex-xl-row align-items-xl-center" #formCategoria="ngForm" (ngSubmit)="cercaTramiteCategoria(formCategoria)">
+            <p class="ms-2 mb-0 mt-1 my-xl-0">Ricerca prodotti tramite categoria</p>
+            <select class="m-2 p-1 border border-secondary rounded-2" name="categoriaProdotto"
+                id="ricercaCategoriaProdotto">
+                <option value="Racchette">Racchette</option>
+                <option value="Palline">Palline</option>
+                <option value="Corde">Corde</option>
+                <option value="Magliette">Magliette</option>
+                <option value="Pantaloncini">Pantaloncini</option>
+                <option value="Borsoni">Borsoni</option>
+                <option value="Scarpe">Scarpe</option>
+            </select>
+            <button class="btn btn-success mb-4 mb-xl-0" type="submit" id="buttonRicercaCategoria">Cerca</button>
+        </form>
+        <form class="formFiltri d-flex flex-column justify-content-center flex-xl-row align-items-xl-center" #formPrezzo="ngForm" (ngSubmit)="cercaTramitePrezzo(formPrezzo)">
+            <p class="ms-2 mb-0 mt-1 my-xl-0">Ricerca prodotti tramite prezzo massimo</p>
+            <select class="m-2 p-1 border border-secondary rounded-2" name="prezzoProdotto" id="ricercaPrezzoProdotto">
+                <option value="10">10 €</option>
+                <option value="25">25 €</option>
+                <option value="50">50 €</option>
+                <option value="100">100 €</option>
+                <option value="200">200 €</option>
+            </select>
+            <button class="btn btn-success" type="submit" id="buttonRicercaPrezzo">Cerca</button>
+        </form>
+    </div>
+
+    <div *ngFor="let prodotto of lista" id="riga" class="card w-75 mt-3">
+        <div *ngIf="prodotto.categoriaProdotto === 'Racchette'" class="align-items-center px-3">
+            <p class="mt-3">id: {{ prodotto.id }}</p>
+            <p>nome: {{ prodotto.nome }}</p>
+            <p>prezzo: {{ prodotto.prezzo }}</p>
+            <p>disponibilitaProdotto: {{ prodotto.disponibilitaProdotto }}</p>
+            <p>categoriaProdotto: {{ prodotto.categoriaProdotto }}</p>
+            <p>marchioRacchetta: {{ prodotto.marchioRacchetta }}</p>
+            <p>larghezzaPiattoCorde: {{ prodotto.larghezzaPiattoCorde }}</p>
+            <p>peso: {{ prodotto.peso }}</p>
+            <p>bilanciamento: {{ prodotto.bilanciamento }}</p>
+            <p>lunghezza: {{ prodotto.lunghezza }}</p>
+            <p>schemaCordeRacchetta: {{ prodotto.schemaCordeRacchetta }}</p>
+            <p>grandezzaManicoRacchetta: {{ prodotto.grandezzaManicoRacchetta }}</p>
+            <p>servitaConFodero: {{ prodotto.servitaConFodero }}</p>
+            <p>servitaIncordata: {{ prodotto.servitaIncordata }}</p>
+            <p>pezziDisponibili: {{ prodotto.pezziDisponibili }}</p>
+            <div class="d-flex flex-column align-items-center contenitorePulsanti">
+                <button class="mb-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/modifica-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Modifica prodotto</button>
+                <button class="mb-2 ms-lg-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/rifornisci-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Rifornisci prodotto</button>
+            </div>
+        </div>
+        <div *ngIf="prodotto.categoriaProdotto === 'Borsoni'" class="align-items-center px-3">
+            <p class="mt-3">id: {{ prodotto.id }}</p>
+            <p>nome: {{ prodotto.nome }}</p>
+            <p>prezzo: {{ prodotto.prezzo }}</p>
+            <p>disponibilitaProdotto: {{ prodotto.disponibilitaProdotto }}</p>
+            <p>categoriaProdotto: {{ prodotto.categoriaProdotto }}</p>
+            <p>marchio: {{ prodotto.marchio }}</p>
+            <p>capacitaBorsaTennis: {{ prodotto.capacitaBorsaTennis }}</p>
+            <p>isolamentoTermico: {{ prodotto.isolamentoTermico }}</p>
+            <p>pezziDisponibili: {{ prodotto.pezziDisponibili }}</p>
+            <div class="d-flex flex-column align-items-center contenitorePulsanti">
+                <button class="mb-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/modifica-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Modifica prodotto</button>
+                <button class="mb-2 ms-lg-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/rifornisci-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Rifornisci prodotto</button>
+            </div>
+        </div>
+
+        <div *ngIf="prodotto.categoriaProdotto === 'Palline'" class="align-items-center px-3">
+            <p class="mt-3">id: {{ prodotto.id }}</p>
+            <p>nome: {{ prodotto.nome }}</p>
+            <p>prezzo: {{ prodotto.prezzo }}</p>
+            <p>disponibilitaProdotto: {{ prodotto.disponibilitaProdotto }}</p>
+            <p>categoriaProdotto: {{ prodotto.categoriaProdotto }}</p>
+            <p>marchioPallineTennis: {{ prodotto.marchioPallineTennis }}</p>
+            <p>quantitaInTuboPallineTennis: {{ prodotto.quantitaInTuboPallineTennis }}</p>
+            <p>tipoSuperficieDiGioco: {{ prodotto.tipoSuperficieDiGioco }}</p>
+            <p>pezziDisponibili: {{ prodotto.pezziDisponibili }}</p>
+            <div class="d-flex flex-column align-items-center contenitorePulsanti">
+                <button class="mb-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/modifica-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Modifica prodotto</button>
+                <button class="mb-2 ms-lg-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/rifornisci-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Rifornisci prodotto</button>
+            </div>
+        </div>
+
+        <div *ngIf="prodotto.categoriaProdotto === 'Corde'" class="align-items-center px-3">
+            <p class="mt-3">id: {{ prodotto.id }}</p>
+            <p>nome: {{ prodotto.nome }}</p>
+            <p>prezzo: {{ prodotto.prezzo }}</p>
+            <p>disponibilitaProdotto: {{ prodotto.disponibilitaProdotto }}</p>
+            <p>categoriaProdotto: {{ prodotto.categoriaProdotto }}</p>
+            <p>marchioCordaTennis: {{ prodotto.marchioCordaTennis }}</p>
+            <p>calibroCorda: {{ prodotto.calibroCorda }}</p>
+            <p>coloreCorda: {{ prodotto.coloreCorda }}</p>
+            <p>tipoSetVenditaCordaTennis: {{ prodotto.tipoSetVenditaCordaTennis }}</p>
+            <p>materialeCordaTennis: {{ prodotto.materialeCordaTennis }}</p>
+            <p>pezziDisponibili: {{ prodotto.pezziDisponibili }}</p>
+            <div class="d-flex flex-column align-items-center contenitorePulsanti">
+                <button class="mb-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/modifica-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Modifica prodotto</button>
+                <button class="mb-2 ms-lg-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/rifornisci-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Rifornisci prodotto</button>
+            </div>
+        </div>
+
+        <div *ngIf="prodotto.categoriaProdotto === 'Magliette'" class="align-items-center px-3">
+            <p class="mt-3">id: {{ prodotto.id }}</p>
+            <p>nome: {{ prodotto.nome }}</p>
+            <p>prezzo: {{ prodotto.prezzo }}</p>
+            <p>disponibilitaProdotto: {{ prodotto.disponibilitaProdotto }}</p>
+            <p>categoriaProdotto: {{ prodotto.categoriaProdotto }}</p>
+            <p>marchio: {{ prodotto.marchio }}</p>
+            <p>colore: {{ prodotto.colore }}</p>
+            <p>destinatarioAbbigliamento: {{ prodotto.destinatarioAbbigliamento }}</p>
+            <p>tagliaAbbigliamento: {{ prodotto.tagliaAbbigliamento }}</p>
+            <p>tipoColloMaglietta: {{ prodotto.tipoColloMaglietta }}</p>
+            <p>pezziDisponibili: {{ prodotto.pezziDisponibili }}</p>
+            <div class="d-flex flex-column align-items-center contenitorePulsanti">
+                <button class="mb-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/modifica-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Modifica prodotto</button>
+                <button class="mb-2 ms-lg-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/rifornisci-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Rifornisci prodotto</button>
+            </div>
+        </div>
+
+        <div *ngIf="prodotto.categoriaProdotto === 'Pantaloncini'" class="align-items-center px-3">
+            <p class="mt-3">id: {{ prodotto.id }}</p>
+            <p>nome: {{ prodotto.nome }}</p>
+            <p>prezzo: {{ prodotto.prezzo }}</p>
+            <p>disponibilitaProdotto: {{ prodotto.disponibilitaProdotto }}</p>
+            <p>categoriaProdotto: {{ prodotto.categoriaProdotto }}</p>
+            <p>marchio: {{ prodotto.marchio }}</p>
+            <p>colore: {{ prodotto.colore }}</p>
+            <p>destinatarioAbbigliamento: {{ prodotto.destinatarioAbbigliamento }}</p>
+            <p>tagliaAbbigliamento: {{ prodotto.tagliaAbbigliamento }}</p>
+            <p>lunghezzaPantaloncino: {{ prodotto.lunghezzaPantaloncino }}</p>
+            <p>taschePantaloncino: {{ prodotto.taschePantaloncino }}</p>
+            <p>pezziDisponibili: {{ prodotto.pezziDisponibili }}</p>
+            <div class="d-flex flex-column align-items-center contenitorePulsanti">
+                <button class="mb-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/modifica-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Modifica prodotto</button>
+                <button class="mb-2 ms-lg-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/rifornisci-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Rifornisci prodotto</button>
+            </div>
+        </div>
+
+        <div *ngIf="prodotto.categoriaProdotto === 'Scarpe'" class="align-items-center px-3">
+            <p class="mt-3">id: {{ prodotto.id }}</p>
+            <p>nome: {{ prodotto.nome }}</p>
+            <p>prezzo: {{ prodotto.prezzo }}</p>
+            <p>disponibilitaProdotto: {{ prodotto.disponibilitaProdotto }}</p>
+            <p>categoriaProdotto: {{ prodotto.categoriaProdotto }}</p>
+            <p>marchio: {{ prodotto.marchio }}</p>
+            <p>destinatarioAbbigliamento: {{ prodotto.destinatarioAbbigliamento }}</p>
+            <p>tipoSuperficieDiGioco: {{ prodotto.tipoSuperficieDiGioco }}</p>
+            <p>colore: {{ prodotto.colore }}</p>
+            <p>tagliaScarpe: {{ prodotto.tagliaScarpe }}</p>
+            <p>pezziDisponibili: {{ prodotto.pezziDisponibili }}</p>
+            <div class="d-flex flex-column align-items-center contenitorePulsanti">
+                <button class="mb-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/modifica-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Modifica prodotto</button>
+                <button class="mb-2 ms-lg-2 btn btn-success" type="button"
+                    [routerLink]="['/lista-prodotti/rifornisci-prodotto/' + prodotto.id]" *ngIf="utenteCorrenteRegistrato.roles.length > 1">Rifornisci prodotto</button>
+            </div>
+        </div>
+    </div>
+</div>
