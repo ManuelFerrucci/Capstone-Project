@@ -22,7 +22,7 @@ Tenere conto che il ruolo User può solo visualizzare quindi alcuni pulsanti non
 
 Per accedere a tutte le funzionalità, si effettui login con le credenziali da ruolo ADMIN.
 
-NB. La prima volta che si fa un login, sia da user che da admin, potrebbero non visualizzarsi bene le informazioni in homa (tra cui un "Benvenuto," senza il nome); basta aggiornare la pagina.
+NB. La prima volta che si fa un login, sia da user che da admin, potrebbero non visualizzarsi bene le informazioni in home (tra cui un "Benvenuto,." senza il nome); basta aggiornare la pagina.
 
 Buona esperienza!
 
