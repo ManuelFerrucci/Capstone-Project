@@ -4,7 +4,7 @@ Per una buona esperienza, prima di partire con la visualizzazione lato browser:
 
 1. Predisporre un db vuoto in postegreSQL ed assicurarsi di sostituire il nome del db creato con quello presente nelle properties di Java.
 
-2. Prima di effettuare il lancio dell'applicazione, è mia buona abitudine cliccare con tasto destro sulla cartella dell'intero progetto Java, andare su "Run as..." e scegliere l'opzione "Maven clean" e, dopo che è terminato, fare "Maven Install", perché ho notato che nonostante non ci siano problemi, potrebbe darne al primo lancio. Facendo così, setta correttamente ogni opzione Maven.
+2. Prima di effettuare il lancio dell'applicazione, è mia buona abitudine con tutti i progetti Spring Boot cliccare con tasto destro sulla cartella dell'intero progetto Java, andare su "Run as..." e scegliere l'opzione "Maven clean" e, dopo che è terminato, fare "Maven Install". Facendo così, setta correttamente ogni opzione Maven.
 
 3. Successivamente, cliccare di nuovo con tasto destro sulla cartella dell'intero progetto Java, andare su "Run as..." e scegliere l'opzione "Spring Boot application". Si effettuerà così il run dell'applicazione. (In console dovrebberro apparire i risultati di 3 System.Out.print.ln(), ovvero "AuthRunner run...", "ProdottoRunner run..." e "OrdineRunner run...").
 
