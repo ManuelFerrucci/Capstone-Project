@@ -1,5 +1,7 @@
 Benvenuti nel mio gestionale per un piccolo negozietto di articoli di tennis!
 
+L'ho chiamato ORION perché, da grande appasionato di astronomia, oltre che di tennis, adoro la costellazione d'Orione e volevo coniugare le due cose!
+
 Per una buona esperienza, prima di partire con la visualizzazione lato browser:
 
 1. Predisporre un db vuoto in postegreSQL ed assicurarsi di sostituire il nome del db creato con quello presente nelle properties di Java.
@@ -19,6 +21,8 @@ Si verrà indirizzati alla pagina /home, ma non essendo autenticati, si verrà i
 Tenere conto che il ruolo User può solo visualizzare quindi alcuni pulsanti non saranno visibili per non permettere di accedere ad alcune pagine, ma se anche si riuscisse ad accedere tramite URL, i tasti spariscono e appare una riga rossa di avviso in cui si legge "NON SI HA L'AUTORIZZAZIONE PER USUFRUIRE DI QUESTA FUNZIONE".
 
 Per accedere a tutte le funzionalità, si effettui login con le credenziali da ruolo ADMIN.
+
+NB. La prima volta che si fa un login, sia da user che da admin, potrebbero non visualizzarsi bene le informazioni in homa (tra cui un "Benvenuto," senza il nome); basta aggiornare la pagina.
 
 Buona esperienza!
 
